@@ -1,6 +1,6 @@
 @echo off
 
-set MAINFAILENAME=python3-template
+set MAINFAILENAME=minextract
 set ENVNAME=%MAINFAILENAME%
 
 set ORIGDIR=%CD%

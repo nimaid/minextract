@@ -1,4 +1,4 @@
-name: python3-template
+name: minextract
 channels:
   - defaults
 dependencies:
