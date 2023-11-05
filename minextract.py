@@ -18,10 +18,7 @@ else:
 
 # Main class
 class Minextract:
-    def __init__(self,
-        json_file,
-        extract_dir
-    ):
+    def __init__(self, json_file, extract_dir):
         self.json_file = os.path.realpath(json_file)
         self.extract_dir = extract_dir
         
@@ -37,19 +34,19 @@ class Minextract:
         with open(self.json_file, "r") as f:
             self.json = json.load(f)
     
-    def extract_sound(self):
-        MC_SOUNDS = r"minecraft/sounds/"
+    def extract_subdir(self, subdir):
+        full_subdir = f"minecraft/{subdir}/"
+        # Find each line with full_subdir prefix, remove the prefix and keep the rest of the path and the hash
+        file_list = {k[len(full_subdir):] : v["hash"] for (k, v) in self.json["objects"].items() if k.startswith(full_subdir)}
         
-        # Find each line with MC_SOUNDS prefix, remove the prefix and keep the rest of the path and the hash
-        sounds = {k[len(MC_SOUNDS):] : v["hash"] for (k, v) in self.json["objects"].items() if k.startswith(MC_SOUNDS)}
-        
-        for fpath, fhash in sounds.items():
-            # Ensure the paths are good to go for Windows with properly escaped backslashes in the string
-            src_fpath = os.path.normpath(f"{self.objects_dir}/{fhash[:2]}/{fhash}")
-            dest_fpath = os.path.normpath(f"{self.output_dir}/sounds/{fpath}")
-
+        print("  {}:".format(subdir))
+        for fpath, fhash in file_list.items():
             # Print current extracted file
             print("    {}".format(fpath))
+            
+            # Ensure the paths are good to go for Windows with properly escaped backslashes in the string
+            src_fpath = os.path.normpath(f"{self.objects_dir}/{fhash[:2]}/{fhash}")
+            dest_fpath = os.path.normpath(f"{self.output_dir}/{subdir}/{fpath}")
 
             # Make any directories needed to put the output file into as Python expects
             os.makedirs(os.path.dirname(dest_fpath), exist_ok=True)
@@ -57,10 +54,32 @@ class Minextract:
             # Copy the file
             shutil.copyfile(src_fpath, dest_fpath)
     
+    def extract_icons(self):
+        self.extract_subdir("icons")
+    
+    def extract_lang(self):
+        self.extract_subdir("lang")
+    
+    def extract_resourcepacks(self):
+        self.extract_subdir("resourcepacks")
+    
+    def extract_sounds(self):
+        self.extract_subdir("sounds")
+    
+    def extract_textures(self):
+        self.extract_subdir("textures")
+    
+    def extract_all(self):
+        self.extract_icons()
+        self.extract_lang()
+        self.extract_resourcepacks()
+        self.extract_sounds()
+        self.extract_textures()
+        #TODO: Non-subfolders
+    
     def run(self):
         print("File extraction :")
-        print("  Sounds:")
-        self.extract_sound()
+        self.extract_all()
 
 
 
