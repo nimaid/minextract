@@ -1,10 +1,10 @@
 # MineXtract
-An extraction tool for Minecraft assets. 
+An extraction tool for Minecraft assets.
 
 Syntax help:
 ```
-> python minextract.py -h
-usage: minextract.py [-h] -j INDEXES_JSON [-o OUTPUT_DIRECOTRY]
+> minextract.exe -h
+usage: minextract.exe [-h] -j INDEXES_JSON [-o OUTPUT_DIRECOTRY]
 
 An extraction tool for Minecraft assets.
 
