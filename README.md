@@ -1,7 +1,7 @@
 # MineXtract
 An extraction tool for Minecraft assets.
 
-[Download the pre-compiled .EXE here!](releases/latest)
+[Download the pre-compiled .EXE here!](https://github.com/nimaid/minextract/releases/latest)
 
 Syntax help:
 ```
