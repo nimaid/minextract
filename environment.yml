@@ -1,4 +1,4 @@
-name: minextract
+name: python3-template
 channels:
   - defaults
 dependencies:
@@ -6,3 +6,4 @@ dependencies:
   - pip
   - pip:
     - pyinstaller
+    - pyinstaller-versionfile
